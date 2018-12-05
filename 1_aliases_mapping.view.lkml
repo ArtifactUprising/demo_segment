@@ -8,14 +8,15 @@ view: aliases_mapping {
         select anonymous_id
         , user_id
         , received_at as received_at
-        from segment.tracks
-
+        from artifact_web_prod.tracks
+        where received_at >= '2017-01-01'
         union
 
         select user_id
           , null
           , received_at
-        from segment.tracks
+        from artifact_web_prod.tracks
+        where received_at >= '2017-01-01'
       )
 
       select

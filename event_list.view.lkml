@@ -7,7 +7,8 @@ view: event_list {
     distribution_style: all
     sql: SELECT
         event as event_types
-      FROM segment.tracks
+      FROM artifact_web_prod.tracks
+      where received_at >= '2017-01-01'
       GROUP BY 1
        ;;
   }

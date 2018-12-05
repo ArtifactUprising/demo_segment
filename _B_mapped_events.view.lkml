@@ -13,9 +13,10 @@ view: mapped_events {
           , t.received_at
           , NULL as referrer
           , 'tracks' as event_source
-        from segment.tracks as t
+        from artifact_web_prod.tracks as t
         inner join ${page_aliases_mapping.SQL_TABLE_NAME} as a2v
           on a2v.alias = coalesce(t.user_id, t.anonymous_id)
+        where t.received_at >= '2017-01-01'
 
         union all
 
@@ -26,9 +27,10 @@ view: mapped_events {
           , t.received_at
           , t.referrer as referrer
           , 'pages' as event_source
-        from segment.pages as t
+        from artifact_web_prod.pages as t
         inner join ${page_aliases_mapping.SQL_TABLE_NAME} as a2v
           on a2v.alias = coalesce(t.user_id, t.anonymous_id)
+        where t.received_at >= '2017-01-01'
       ) as e
        ;;
   }
